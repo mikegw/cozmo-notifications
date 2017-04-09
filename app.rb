@@ -18,6 +18,7 @@ post '/' do
   notification['id'] = SecureRandom.hex
   notifications << notification
   status 201
+  body notification.to_json
 end
 
 delete '/:id' do |id|
@@ -25,4 +26,5 @@ delete '/:id' do |id|
   halt 404 unless notification
   notifications.delete(notification)
   status 200
+  body notification.to_json
 end
