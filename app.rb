@@ -21,6 +21,17 @@ post '/' do
   body notification.to_json
 end
 
+post '/api/v2/transactions/create_from_charge' do
+  charge = JSON.parse(request.body.read)
+  notification = {
+    id: SecureRandom.hex
+    charge: charge
+  }
+  notifications << notification
+  status 201
+  body notification.to_json
+end
+
 delete '/:id' do |id|
   notification = notifications.find { |notification| notification['id'] == id }
   halt 404 unless notification
