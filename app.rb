@@ -22,7 +22,7 @@ post '/' do
 end
 
 post '/api/v2/transactions/create_from_charge' do
-  charge = JSON.parse(request.body.read)
+  charge = request.POST.to_hash
   notification = {
     id: SecureRandom.hex,
     charge: charge
