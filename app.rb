@@ -21,11 +21,16 @@ post '/' do
   body notification.to_json
 end
 
+def build_name(charge)
+  name = charge['charge']['card']['name']
+  name.split('/').reverse.join(" ")
+end
+
 post '/api/v2/transactions/create_from_charge' do
   charge = request.POST.to_hash
   notification = {
     "id" => SecureRandom.hex,
-    "message" => charge['charge']['card']['name']
+    "message" => build_name(charge)
   }
   notifications << notification
   status 201
