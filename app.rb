@@ -24,8 +24,8 @@ end
 post '/api/v2/transactions/create_from_charge' do
   charge = request.POST.to_hash
   notification = {
-    id: SecureRandom.hex,
-    message: charge['charge']['card']['name']
+    "id" => SecureRandom.hex,
+    "message" => charge['charge']['card']['name']
   }
   notifications << notification
   status 201
